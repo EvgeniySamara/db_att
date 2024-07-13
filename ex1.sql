@@ -3,6 +3,11 @@
 Пример: 123456 ->'1 days 10 hours 17 minutes 36 seconds '
 */
 
+/*
+1. Создайте функцию, которая принимает кол-во сек и формат их в кол-во дней часов.
+Пример: 123456 ->'1 days 10 hours 17 minutes 36 seconds '
+*/
+
 DELIMITER $$ -- //
 
 
@@ -14,13 +19,16 @@ BEGIN
 	set res = concat (i,' days ');
 	set num = num % 86400;
   set i = num div 3600;
-	set res = concat (res, i,' hours');	
+	set res = concat (res, i,' hours ');	
   set num = num % 3600;	
-	select num;
+  set i = num div 60;
+  set num = num % 60;	  
+	set res = concat (res, i,' minutes ', num, ' seconds');	
+	select res;
 	
 END $$ -- //
 DELIMITER ;
 
 
-call hello(123456);
+call hello(1234567);
 
